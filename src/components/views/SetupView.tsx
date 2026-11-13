@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Gamepad2, Info, Flag } from "lucide-react";
 import { useGame } from "@/context/GameContext";
+import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
 
 export const SetupView: React.FC = () => {
   const {
@@ -23,7 +24,8 @@ export const SetupView: React.FC = () => {
   ];
 
   return (
-    <div className="w-full py-4 sm:py-6 lg:py-3 px-3 sm:px-6 md:px-8 flex-1 flex flex-col justify-center">
+    <div className="relative overflow-hidden w-full py-4 sm:py-6 lg:py-3 px-3 sm:px-6 md:px-8 flex-1 flex flex-col justify-center">
+      <NusantaraBackground variant="subtle" />
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}

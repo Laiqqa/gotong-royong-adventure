@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { IsometricMockup } from "@/components/landing/IsometricMockup";
+import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
 
 const titleContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -59,6 +60,7 @@ export const LandingView: React.FC = () => {
     <div className="w-full flex flex-col">
       {/* Hero Banner Section (Optimized to fit 100% on laptop screens) */}
       <section className="relative overflow-hidden bg-surface-container-low py-6 sm:py-8 lg:py-4 lg:min-h-[calc(100vh-3.5rem)] lg:flex lg:flex-col lg:justify-center px-4 md:px-8 lg:px-12 border-b border-surface-container">
+        <NusantaraBackground variant="hero" />
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
           {/* Left Column: Heading, Badges, CTAs */}
           <motion.div
@@ -198,8 +200,10 @@ export const LandingView: React.FC = () => {
       </section>
 
       {/* Educational Pillars Section */}
-      <section id="pillars-section" className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16">
-        <div className="flex flex-col items-center text-center gap-1.5 mb-8 sm:mb-10">
+      <section id="pillars-section" className="relative overflow-hidden w-full py-12 md:py-16">
+        <NusantaraBackground variant="section" />
+        <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 relative z-10">
+          <div className="flex flex-col items-center text-center gap-1.5 mb-8 sm:mb-10">
           <span className="text-xs sm:text-sm font-extrabold text-secondary uppercase tracking-widest">
             Pilar Profil Pelajar Pancasila
           </span>
@@ -277,6 +281,7 @@ export const LandingView: React.FC = () => {
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
           </button>
+        </div>
         </div>
       </section>
     </div>

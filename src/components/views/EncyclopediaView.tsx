@@ -6,6 +6,7 @@ import { Search, BookOpen, ArrowLeft, Sparkles, SearchX } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { PROVINCES } from "@/data/provinces";
 import { Region } from "@/types/game";
+import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
 
 export const EncyclopediaView: React.FC = () => {
   const { setView, players } = useGame();
@@ -39,8 +40,9 @@ export const EncyclopediaView: React.FC = () => {
   });
 
   return (
-    <div className="w-full py-10 px-4 md:px-8 lg:px-12">
-      <div className="max-w-7xl mx-auto flex flex-col gap-8">
+    <div className="relative overflow-hidden w-full py-10 px-4 md:px-8 lg:px-12">
+      <NusantaraBackground variant="subtle" />
+      <div className="max-w-7xl mx-auto flex flex-col gap-8 relative z-10">
         {/* Encyclopedia Header */}
         <div className="bg-surface-container-low p-6 sm:p-8 rounded-3xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm border border-surface-container">
           <div className="flex flex-col gap-2">
