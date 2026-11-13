@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Gamepad2,
@@ -11,11 +10,11 @@ import {
   Users,
   HeartHandshake,
   Globe2,
-  ShieldCheck,
   ArrowRight,
   ChevronDown,
 } from "lucide-react";
 import { useGame } from "@/context/GameContext";
+import { IsometricMockup } from "@/components/landing/IsometricMockup";
 
 export const LandingView: React.FC = () => {
   const { setView, openModal } = useGame();
@@ -101,57 +100,14 @@ export const LandingView: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Visual Hero Element */}
+          {/* Right Column: Visual Hero Element (Isometric 3D Perspective Card Mockup) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.35, delay: 0.1 }}
-            className="lg:col-span-5 relative flex justify-center"
+            className="lg:col-span-5 relative flex justify-center items-center"
           >
-            <div className="relative w-full max-w-[300px] sm:max-w-xs md:max-w-sm lg:max-w-[330px] xl:max-w-[380px] rounded-2xl bg-surface-container-lowest shadow-lg p-3 sm:p-4 flex flex-col items-center justify-between overflow-hidden border border-surface-container">
-              {/* Image banner */}
-              <div className="w-full h-[150px] sm:h-[180px] lg:h-[160px] xl:h-[200px] rounded-xl overflow-hidden relative shadow-inner">
-                <Image
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCacjhXjfFwlC1_1bjlLzd-sjC1rP4R30cxrpCjwVgHUl6aO5V9lQwTWE3l3muO5ewei2ecbDkzF3meFWoBqr1L1yz6qWFTJa7VUdTPyc5ppCSp0tpBH1B9aZNfFXP54bxtZ4M8YISZ0csrrUCbDwf7NrLXXSMvsZ2KmNl-hHewpTnyT6_liM6JXoc_hInvawfcbFsiEuUupO3obxB_C7GUEjSOr3MGMB8NByE-KL-"
-                  alt="Ilustrasi siswa nusantara bergotong royong membangun jembatan persatuan"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 360px"
-                />
-                <div className="absolute bottom-2 left-2 bg-surface-container-lowest/90 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[11px] font-bold text-primary shadow-xs flex items-center gap-1">
-                  <Users className="w-3 h-3" />
-                  <span>Semangat Kebersamaan</span>
-                </div>
-              </div>
-
-              {/* Mini Preview Cards */}
-              <div className="w-full flex items-center justify-between gap-2 mt-2.5">
-                <div className="flex-1 bg-surface-container-low p-2 rounded-lg flex items-center gap-1.5 border border-surface-container">
-                  <span className="text-lg" role="img" aria-label="Jabat tangan">🤝</span>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-[11px] font-bold text-on-surface truncate">Ngayah Bali</span>
-                    <span className="text-[10px] text-on-surface-variant truncate">Kerja ikhlas</span>
-                  </div>
-                </div>
-                <div className="flex-1 bg-surface-container-low p-2 rounded-lg flex items-center gap-1.5 border border-surface-container">
-                  <span className="text-lg" role="img" aria-label="Api bakar batu">🔥</span>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-[11px] font-bold text-on-surface truncate">Bakar Batu</span>
-                    <span className="text-[10px] text-on-surface-variant truncate">Papua damai</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Footer tag */}
-              <div className="w-full pt-2 flex items-center justify-between text-on-surface-variant text-[11px]">
-                <span className="font-semibold flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-                  <span>Sila ke-3: Persatuan</span>
-                </span>
-                <span className="text-secondary font-extrabold">Edisi Merdeka Belajar</span>
-              </div>
-            </div>
+            <IsometricMockup />
           </motion.div>
         </div>
 
