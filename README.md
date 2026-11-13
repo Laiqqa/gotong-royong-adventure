@@ -73,3 +73,4 @@ npm run start
 
 ## Lisensi
 Proyek ini dibuat untuk tujuan edukasi Pendidikan Pancasila dan pelestarian budaya gotong royong Indonesia.
+
