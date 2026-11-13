@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Gamepad2,
   BookOpen,
@@ -15,6 +15,37 @@ import {
 } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { IsometricMockup } from "@/components/landing/IsometricMockup";
+
+const titleContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.035,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const letterVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+    scale: 0.85,
+    rotate: -4,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      damping: 12,
+      stiffness: 220,
+    },
+  },
+};
 
 export const LandingView: React.FC = () => {
   const { setView, openModal } = useGame();
@@ -41,9 +72,50 @@ export const LandingView: React.FC = () => {
               <span className="uppercase tracking-wider">Pendidikan Pancasila Interaktif</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-[34px] xl:text-5xl font-extrabold text-on-surface tracking-tight leading-tight">
-              GOTONG ROYONG <span className="text-primary">ADVENTURE</span>
-            </h1>
+            <motion.h1
+              variants={titleContainerVariants}
+              initial="hidden"
+              animate="visible"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[34px] xl:text-5xl font-extrabold text-on-surface tracking-tight leading-tight flex flex-wrap gap-x-2.5 sm:gap-x-3.5 select-none"
+              aria-label="GOTONG ROYONG ADVENTURE"
+            >
+              <span className="inline-flex">
+                {"GOTONG".split("").map((char, index) => (
+                  <motion.span
+                    key={`g-${index}`}
+                    variants={letterVariants}
+                    whileHover={{ y: -4, scale: 1.15, color: "#166534", transition: { duration: 0.15 } }}
+                    className="inline-block cursor-default transition-colors"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="inline-flex">
+                {"ROYONG".split("").map((char, index) => (
+                  <motion.span
+                    key={`r-${index}`}
+                    variants={letterVariants}
+                    whileHover={{ y: -4, scale: 1.15, color: "#166534", transition: { duration: 0.15 } }}
+                    className="inline-block cursor-default transition-colors"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+              <span className="inline-flex text-primary">
+                {"ADVENTURE".split("").map((char, index) => (
+                  <motion.span
+                    key={`a-${index}`}
+                    variants={letterVariants}
+                    whileHover={{ y: -4, scale: 1.15, color: "#ca8a04", transition: { duration: 0.15 } }}
+                    className="inline-block cursor-default transition-colors"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            </motion.h1>
 
             <p className="text-xs sm:text-sm lg:text-sm xl:text-base text-on-surface-variant max-w-xl font-medium leading-relaxed">
               Jelajahi Nusantara, kenali kekayaan tradisi gotong royong 38 provinsi, dan hidupkan kembali semangat kebersamaan Pancasila melalui permainan papan multipemain yang seru dan mendidik!
