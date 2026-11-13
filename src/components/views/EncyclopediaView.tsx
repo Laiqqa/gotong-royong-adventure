@@ -136,7 +136,7 @@ export const EncyclopediaView: React.FC = () => {
                       {prov.icon}
                     </span>
                     <div className="flex flex-col">
-                      <h4 className="font-extrabold text-base text-on-surface">
+                      <h4 className="font-extrabold text-base text-on-surface font-display">
                         {prov.name}
                       </h4>
                       <span className="text-[11px] font-bold text-primary uppercase">
@@ -144,9 +144,6 @@ export const EncyclopediaView: React.FC = () => {
                       </span>
                     </div>
                   </div>
-                  <span className="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center font-black text-xs text-on-surface-variant">
-                    #{prov.id}
-                  </span>
                 </div>
 
                 {/* Highlight Nilai Filosofis Luhur */}
