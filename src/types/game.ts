@@ -1,4 +1,4 @@
-export type GameView = 'landing' | 'setup' | 'board' | 'encyclopedia' | 'gameover';
+export type GameView = 'cover' | 'landing' | 'setup' | 'board' | 'encyclopedia' | 'gameover';
 
 export type Region = 'sumatera' | 'jawa' | 'kalimantan' | 'sulawesi' | 'nusatenggara' | 'papua';
 

@@ -7,6 +7,8 @@ import { useGame } from "@/context/GameContext";
 export const Header: React.FC = () => {
   const { view, setView, openModal, soundEnabled, toggleSound, restartGame, bgmPlaying, toggleBgm } = useGame();
 
+  if (view === "cover") return null;
+
   const handleNav = (target: "landing" | "board" | "encyclopedia") => {
     setView(target);
   };

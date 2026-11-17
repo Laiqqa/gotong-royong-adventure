@@ -3,6 +3,7 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useGame } from "@/context/GameContext";
+import { CoverView } from "@/components/views/CoverView";
 import { LandingView } from "@/components/views/LandingView";
 import { SetupView } from "@/components/views/SetupView";
 import { BoardView } from "@/components/views/BoardView";
@@ -15,6 +16,19 @@ export default function Home() {
   return (
     <div className="w-full flex-1 flex flex-col">
       <AnimatePresence mode="wait">
+        {view === "cover" && (
+          <motion.div
+            key="cover"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+            className="w-full flex-1 flex flex-col"
+          >
+            <CoverView />
+          </motion.div>
+        )}
+
         {view === "landing" && (
           <motion.div
             key="landing"

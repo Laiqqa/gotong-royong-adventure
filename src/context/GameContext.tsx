@@ -51,7 +51,7 @@ interface GameContextType {
 const GameContext = createContext<GameContextType | undefined>(undefined);
 
 export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [view, setView] = useState<GameView>("landing");
+  const [view, setView] = useState<GameView>("cover");
   const [activePlayerCount, setActivePlayerCount] = useState<number>(2);
   const [players, setPlayers] = useState<Player[]>(INITIAL_PLAYERS.slice(0, 2));
   const [currentTurnIndex, setCurrentTurnIndex] = useState<number>(0);

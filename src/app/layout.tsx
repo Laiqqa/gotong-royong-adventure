@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { GameProvider } from "@/context/GameContext";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { AppLayout } from "@/components/layout/AppLayout";
 import { ToastContainer } from "@/components/ui/ToastContainer";
 import { ProvinceModal } from "@/components/modals/ProvinceModal";
 import { ChallengeModal } from "@/components/modals/ChallengeModal";
@@ -36,9 +35,7 @@ export default function RootLayout({
     <html lang="id">
       <body className="min-h-screen flex flex-col bg-background font-sans text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
         <GameProvider>
-          <Header />
-          <main className="flex-1 w-full pt-14 sm:pt-16 flex flex-col">{children}</main>
-          <Footer />
+          <AppLayout>{children}</AppLayout>
 
           {/* Modals & Notifications */}
           <ProvinceModal />

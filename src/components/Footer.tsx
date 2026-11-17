@@ -7,8 +7,8 @@ import { useGame } from "@/context/GameContext";
 export const Footer: React.FC = () => {
   const { view } = useGame();
 
-  // On board game view, hide the global marketing footer to fit the whole game on laptop screen
-  if (view === "board") return null;
+  // On cover and board game view, hide the global marketing footer
+  if (view === "cover" || view === "board") return null;
 
   return (
     <footer className="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-t border-surface-container mt-auto">
