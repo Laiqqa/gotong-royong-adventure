@@ -12,6 +12,8 @@ import {
   Globe2,
   ArrowRight,
   ChevronDown,
+  Sparkles,
+  BookMarked,
 } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { IsometricMockup } from "@/components/landing/IsometricMockup";
@@ -170,6 +172,24 @@ export const LandingView: React.FC = () => {
               >
                 <Compass className="w-4 h-4 text-tertiary" />
                 <span>ENSIKLOPEDIA</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setView("quiz")}
+                className="px-3.5 py-2 sm:px-4 sm:py-2.5 bg-surface-container text-on-surface rounded-full font-bold text-xs sm:text-sm hover:bg-surface-container-high transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none focus:ring-4 focus:ring-outline/30"
+              >
+                <Sparkles className="w-4 h-4 text-secondary" />
+                <span>ARENA KUIS</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => openModal("passport")}
+                className="px-3.5 py-2 sm:px-4 sm:py-2.5 bg-secondary-container/20 text-secondary border border-secondary/30 rounded-full font-bold text-xs sm:text-sm hover:bg-secondary-container/30 transition-all flex items-center gap-1.5 cursor-pointer focus:outline-none focus:ring-4 focus:ring-secondary/30 shadow-xs"
+              >
+                <BookMarked className="w-4 h-4 text-secondary" />
+                <span>PASPOR BUDAYA</span>
               </button>
             </div>
           </motion.div>

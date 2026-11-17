@@ -27,10 +27,11 @@ interface GameContextType {
   removeToast: (id: string) => void;
   showToast: (message: string, type?: ToastMessage["type"]) => void;
   logActivity: (text: string, icon?: string) => void;
-  activeModal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity" | null;
+  activeModal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity" | "passport" | null;
   selectedProvince: Province | null;
-  openModal: (modal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity", prov?: Province, isLanding?: boolean) => void;
+  openModal: (modal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity" | "passport", prov?: Province, isLanding?: boolean) => void;
   closeModal: () => void;
+  collectedProvinces: number[];
   startGame: () => void;
   rollDice: () => void;
   answerProvince: (correct: boolean) => void;
@@ -38,6 +39,7 @@ interface GameContextType {
   answerQuiz: (correct: boolean) => void;
   finishChallengeTurn: () => void;
   jailPayFine: () => boolean;
+  jailBailByFriend: (helperPlayerId: number) => boolean;
   jailVerify: (inputString: string) => boolean;
   claimPosBonus: () => void;
   restartGame: () => void;
@@ -71,8 +73,18 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     },
   ]);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
-  const [activeModal, setActiveModal] = useState<"rules" | "province" | "challenge" | "jail" | "pos" | "unity" | null>(null);
+  const [activeModal, setActiveModal] = useState<"rules" | "province" | "challenge" | "jail" | "pos" | "unity" | "passport" | null>(null);
   const [selectedProvince, setSelectedProvince] = useState<Province | null>(null);
+  const [collectedProvinces, setCollectedProvinces] = useState<number[]>([]);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("gra_collected_provinces");
+      if (saved) {
+        setCollectedProvinces(JSON.parse(saved));
+      }
+    } catch {}
+  }, []);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [bgmPlaying, setBgmPlaying] = useState<boolean>(true);
   const [bgmVolume, setBgmVolume] = useState<number>(45);
@@ -131,7 +143,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const openModal = (
-    modal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity",
+    modal: "rules" | "province" | "challenge" | "jail" | "pos" | "unity" | "passport",
     prov?: Province,
     isLanding = false
   ) => {
@@ -383,6 +395,18 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     );
 
     if (correct) {
+      if (selectedProvince) {
+        setCollectedProvinces((prev) => {
+          if (!prev.includes(selectedProvince.id)) {
+            const next = [...prev, selectedProvince.id];
+            try {
+              localStorage.setItem("gra_collected_provinces", JSON.stringify(next));
+            } catch {}
+            return next;
+          }
+          return prev;
+        });
+      }
       playTone(587.33, "triangle", 0.2);
       try {
         confetti({
@@ -463,6 +487,54 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
     showToast("Uang gotong royongmu tidak mencukupi! Selesaikan kuis 5 provinsi.", "warning");
     return false;
+  };
+
+  const jailBailByFriend = (helperId: number): boolean => {
+    const helper = players.find((p) => p.id === helperId);
+    if (!helper || helper.money < 50) {
+      showToast("Kas teman tidak mencukupi untuk membantu tebusan!", "warning");
+      return false;
+    }
+
+    setPlayers((prev) =>
+      prev.map((p) => {
+        if (p.id === helperId) {
+          return {
+            ...p,
+            money: p.money - 50,
+            points: p.points + 40,
+          };
+        }
+        if (p.id === activePlayer.id) {
+          return {
+            ...p,
+            inJail: false,
+          };
+        }
+        return p;
+      })
+    );
+
+    try {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+      });
+    } catch {}
+
+    closeModal();
+    playTone(587.33, "triangle", 0.25);
+    showToast(
+      `Aksi Gotong Royong Nyata! ${helper.name} menebus denda Rp 50 untuk ${activePlayer.name} (+40 Poin Kebajikan)!`,
+      "success"
+    );
+    logActivity(
+      `${helper.name} bergotong royong menebus ${activePlayer.name} dari Ruang Evaluasi (+40 Poin).`,
+      "diversity_3"
+    );
+    endTurn();
+    return true;
   };
 
   const jailVerify = (inputString: string): boolean => {
@@ -595,6 +667,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         selectedProvince,
         openModal,
         closeModal,
+        collectedProvinces,
         startGame,
         rollDice,
         answerProvince,
@@ -602,6 +675,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         answerQuiz,
         finishChallengeTurn,
         jailPayFine,
+        jailBailByFriend,
         jailVerify,
         claimPosBonus,
         restartGame,

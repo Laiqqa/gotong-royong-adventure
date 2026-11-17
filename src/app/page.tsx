@@ -8,6 +8,7 @@ import { LandingView } from "@/components/views/LandingView";
 import { SetupView } from "@/components/views/SetupView";
 import { BoardView } from "@/components/views/BoardView";
 import { EncyclopediaView } from "@/components/views/EncyclopediaView";
+import { QuizArenaView } from "@/components/views/QuizArenaView";
 import { GameOverView } from "@/components/views/GameOverView";
 
 export default function Home() {
@@ -78,6 +79,19 @@ export default function Home() {
             className="w-full flex-1 flex flex-col"
           >
             <EncyclopediaView />
+          </motion.div>
+        )}
+
+        {view === "quiz" && (
+          <motion.div
+            key="quiz"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="w-full flex-1 flex flex-col"
+          >
+            <QuizArenaView />
           </motion.div>
         )}
 

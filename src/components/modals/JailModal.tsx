@@ -2,11 +2,11 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock, Coins, Check, AlertCircle } from "lucide-react";
+import { Lock, Coins, Check, AlertCircle, HeartHandshake } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 
 export const JailModal: React.FC = () => {
-  const { activeModal, activePlayer, jailPayFine, jailVerify } = useGame();
+  const { activeModal, activePlayer, players, jailPayFine, jailBailByFriend, jailVerify } = useGame();
   const [provinceInput, setProvinceInput] = useState<string>("");
   const [errorMsg, setErrorMsg] = useState<string>("");
 
@@ -124,6 +124,53 @@ export const JailModal: React.FC = () => {
                 <span>Verifikasi dan Bebas (+10 Poin)</span>
               </button>
             </div>
+
+            {/* Option 3: Gotong Royong: Teman Bantu Tebus */}
+            {players.filter((p) => p.id !== activePlayer.id).length > 0 && (
+              <div className="flex flex-col gap-2 p-3 rounded-xl bg-surface-container-lowest border border-primary/20 shadow-xs">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs sm:text-sm font-bold text-primary flex items-center gap-1.5">
+                    <HeartHandshake className="w-4 h-4 text-primary" />
+                    <span>Opsi 3: Solidaritas Gotong Royong (Teman Bantu Tebus)</span>
+                  </span>
+                  <span className="text-[10px] font-black text-secondary bg-secondary/10 px-2 py-0.5 rounded-full">
+                    Bonus +40 Poin
+                  </span>
+                </div>
+                <p className="text-[11px] text-on-surface-variant">
+                  Teman yang bersedia menyumbangkan kas Rp 50 untuk membebaskan {activePlayer.name} akan memperoleh apresiasi persatuan sebesar +40 Poin Kebajikan!
+                </p>
+
+                <div className="flex flex-wrap gap-2 pt-1">
+                  {players
+                    .filter((p) => p.id !== activePlayer.id)
+                    .map((friend) => {
+                      const canHelp = friend.money >= 50;
+                      return (
+                        <button
+                          key={friend.id}
+                          type="button"
+                          disabled={!canHelp}
+                          onClick={() => jailBailByFriend(friend.id)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                            canHelp
+                              ? "bg-primary/10 text-primary hover:bg-primary hover:text-on-primary border border-primary/30 cursor-pointer shadow-xs active:scale-95"
+                              : "bg-surface-container text-on-surface-variant opacity-50 cursor-not-allowed border border-transparent"
+                          }`}
+                          title={
+                            canHelp
+                              ? `${friend.name} bayar Rp 50 untuk bebaskan ${activePlayer.name} (+40 Poin)`
+                              : `Kas ${friend.name} (Rp ${friend.money}) kurang dari Rp 50`
+                          }
+                        >
+                          <span className={`w-2.5 h-2.5 rounded-full ${friend.badgeBg} shadow-xs`} />
+                          <span>{friend.name} Tebus (Rp 50)</span>
+                        </button>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>

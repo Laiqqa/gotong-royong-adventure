@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Volume2, VolumeX, RotateCcw, HelpCircle, Compass, Gamepad2, BookOpen, Music2 } from "lucide-react";
+import { Volume2, VolumeX, RotateCcw, HelpCircle, Compass, Gamepad2, BookOpen, Music2, BookMarked, Sparkles } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 
 export const Header: React.FC = () => {
@@ -9,7 +9,7 @@ export const Header: React.FC = () => {
 
   if (view === "cover") return null;
 
-  const handleNav = (target: "landing" | "board" | "encyclopedia") => {
+  const handleNav = (target: "landing" | "board" | "encyclopedia" | "quiz") => {
     setView(target);
   };
 
@@ -84,6 +84,30 @@ export const Header: React.FC = () => {
 
           <button
             type="button"
+            onClick={() => handleNav("quiz")}
+            className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${
+              view === "quiz"
+                ? "bg-primary text-on-primary shadow-tactile-primary"
+                : "text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface"
+            }`}
+          >
+            <span className="flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Arena Kuis</span>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => openModal("passport")}
+            className="px-3 py-1 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all flex items-center gap-1.5"
+          >
+            <BookMarked className="w-3.5 h-3.5 text-secondary" />
+            <span>Paspor Budaya</span>
+          </button>
+
+          <button
+            type="button"
             onClick={() => openModal("rules")}
             className="px-3 py-1 rounded-full text-xs font-bold text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all"
           >
@@ -96,6 +120,15 @@ export const Header: React.FC = () => {
 
         {/* Action utility controls */}
         <div className="flex items-center gap-1.5 sm:gap-2">
+          <button
+            type="button"
+            onClick={() => openModal("passport")}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-secondary-container/20 text-secondary hover:bg-secondary-container/35 font-extrabold text-xs border border-secondary/30 transition-all shadow-xs"
+            title="Buka Paspor Budaya & Koleksi 38 Stempel"
+          >
+            <BookMarked className="w-3.5 h-3.5 text-secondary" />
+            <span className="hidden md:inline">Paspor</span>
+          </button>
           <button
             type="button"
             onClick={restartGame}

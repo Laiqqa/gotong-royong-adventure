@@ -9,6 +9,7 @@ import { JailModal } from "@/components/modals/JailModal";
 import { PosPersatuanModal } from "@/components/modals/PosPersatuanModal";
 import { RulesModal } from "@/components/modals/RulesModal";
 import { UnityModal } from "@/components/modals/UnityModal";
+import { PassportModal } from "@/components/modals/PassportModal";
 import { BackgroundMusic } from "@/components/audio/BackgroundMusic";
 
 export const metadata: Metadata = {
@@ -48,6 +49,7 @@ export default function RootLayout({
           <PosPersatuanModal />
           <RulesModal />
           <UnityModal />
+          <PassportModal />
           <ToastContainer />
           <BackgroundMusic />
         </GameProvider>
