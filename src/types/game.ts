@@ -46,6 +46,7 @@ export interface Player {
   money: number;
   inJail: boolean;
   unlockedProv: number;
+  isBot?: boolean;
 }
 
 export interface ActivityLog {

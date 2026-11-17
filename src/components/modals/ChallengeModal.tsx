@@ -8,7 +8,7 @@ import { CHALLENGE_QUIZZES } from "@/data/quizzes";
 import { Quiz } from "@/types/game";
 
 export const ChallengeModal: React.FC = () => {
-  const { activeModal, closeModal, answerQuiz, activePlayer } = useGame();
+  const { activeModal, finishChallengeTurn, answerQuiz, activePlayer } = useGame();
   const [currentQuiz, setCurrentQuiz] = useState<Quiz>(CHALLENGE_QUIZZES[0]);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [answered, setAnswered] = useState<boolean>(false);
@@ -32,7 +32,7 @@ export const ChallengeModal: React.FC = () => {
   };
 
   const handleFinish = () => {
-    closeModal();
+    finishChallengeTurn();
   };
 
   const optionLetters = ["A", "B", "C", "D"];

@@ -13,6 +13,7 @@ interface GameContextType {
   setActivePlayerCount: (count: number) => void;
   players: Player[];
   updatePlayerName: (id: number, name: string) => void;
+  togglePlayerBot: (id: number) => void;
   currentTurnIndex: number;
   currentRound: number;
   isRolling: boolean;
@@ -35,6 +36,7 @@ interface GameContextType {
   answerProvince: (correct: boolean) => void;
   finishProvinceTurn: () => void;
   answerQuiz: (correct: boolean) => void;
+  finishChallengeTurn: () => void;
   jailPayFine: () => boolean;
   jailVerify: (inputString: string) => boolean;
   claimPosBonus: () => void;
@@ -146,6 +148,28 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const updatePlayerName = (id: number, name: string) => {
     setPlayers((prev) =>
       prev.map((p) => (p.id === id ? { ...p, name } : p))
+    );
+  };
+
+  const togglePlayerBot = (id: number) => {
+    if (id === 1) return;
+    const botNames: Record<number, string> = {
+      2: "Bot Garuda",
+      3: "Bot Bhinneka",
+      4: "Bot Nusantara",
+    };
+    setPlayers((prev) =>
+      prev.map((p) => {
+        if (p.id !== id) return p;
+        const nextIsBot = !p.isBot;
+        let nextName = p.name;
+        if (nextIsBot && (p.name === `Pemain ${id}` || p.name.trim() === "")) {
+          nextName = botNames[id] || `Bot ${id}`;
+        } else if (!nextIsBot && p.name === (botNames[id] || `Bot ${id}`)) {
+          nextName = `Pemain ${id}`;
+        }
+        return { ...p, isBot: nextIsBot, name: nextName };
+      })
     );
   };
 
@@ -402,6 +426,24 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         }
       })
     );
+
+    if (correct) {
+      playTone(587.33, "triangle", 0.2);
+      showToast(`Mantap! ${activePlayer.name} berhasil menjawab Kartu Tantangan (+15 Poin, +Rp 15)!`, "success");
+      logActivity(`${activePlayer.name} menjawab benar Kartu Tantangan (+15 Poin).`, "verified");
+    } else {
+      playTone(220, "sawtooth", 0.2);
+      showToast(`${activePlayer.name} kurang tepat pada Kartu Tantangan (-3 Poin).`, "warning");
+      logActivity(`${activePlayer.name} belum tepat menjawab Kartu Tantangan (-3 Poin).`, "cancel");
+    }
+  };
+
+  const finishChallengeTurn = () => {
+    const wasLanding = isLandingTurn;
+    closeModal();
+    if (wasLanding) {
+      endTurn();
+    }
   };
 
   const jailPayFine = (): boolean => {
@@ -469,6 +511,63 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setView("setup");
   };
 
+  // Automated Bot AI Turn Controller
+  useEffect(() => {
+    if (view !== "board" || !activePlayer?.isBot) return;
+
+    if (activeModal === null && dicePhase === "idle" && !isRolling) {
+      const t = setTimeout(() => {
+        rollDice();
+      }, 950);
+      return () => clearTimeout(t);
+    }
+
+    if (activeModal === "province") {
+      const t1 = setTimeout(() => {
+        answerProvince(Math.random() < 0.72);
+      }, 1300);
+      const t2 = setTimeout(() => {
+        finishProvinceTurn();
+      }, 2200);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+
+    if (activeModal === "challenge") {
+      const t1 = setTimeout(() => {
+        answerQuiz(Math.random() < 0.72);
+      }, 1300);
+      const t2 = setTimeout(() => {
+        finishChallengeTurn();
+      }, 2200);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+
+    if (activeModal === "jail") {
+      const t = setTimeout(() => {
+        if (activePlayer.money >= 50) {
+          jailPayFine();
+        } else {
+          jailVerify("Aceh, Bali, Papua, Jawa Barat, Kalimantan Timur");
+        }
+      }, 1200);
+      return () => clearTimeout(t);
+    }
+
+    if (activeModal === "pos") {
+      const t = setTimeout(() => {
+        claimPosBonus();
+      }, 1100);
+      return () => clearTimeout(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, activePlayer?.id, activePlayer?.isBot, activeModal, dicePhase, isRolling]);
+
   return (
     <GameContext.Provider
       value={{
@@ -478,6 +577,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setActivePlayerCount,
         players,
         updatePlayerName,
+        togglePlayerBot,
         currentTurnIndex,
         currentRound,
         isRolling,
@@ -500,6 +600,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         answerProvince,
         finishProvinceTurn,
         answerQuiz,
+        finishChallengeTurn,
         jailPayFine,
         jailVerify,
         claimPosBonus,

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, Banknote, MapPin, Lock, Award } from "lucide-react";
+import { Star, Banknote, MapPin, Lock, Award, Bot } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 
 export const SidebarPlayers: React.FC = () => {
@@ -42,6 +42,12 @@ export const SidebarPlayers: React.FC = () => {
                   >
                     {p.name}
                   </span>
+                  {p.isBot && (
+                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.2 rounded-full bg-tertiary/15 text-tertiary text-[9px] font-black">
+                      <Bot className="w-2.5 h-2.5" />
+                      BOT
+                    </span>
+                  )}
                 </div>
                 {isActive && (
                   <span className="text-[9px] font-black px-1.5 py-0.2 rounded-full bg-primary text-on-primary">

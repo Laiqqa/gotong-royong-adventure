@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Trophy, RotateCcw, Home } from "lucide-react";
 import { useGame } from "@/context/GameContext";
+import { CertificateButton } from "@/components/ui/CertificateButton";
 
 export const GameOverView: React.FC = () => {
   const { players, setView, restartGame } = useGame();
@@ -124,6 +125,8 @@ export const GameOverView: React.FC = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1">
+          {winner && <CertificateButton winner={winner} />}
+
           <button
             type="button"
             onClick={restartGame}

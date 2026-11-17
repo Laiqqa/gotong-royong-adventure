@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Gamepad2, Info, Flag } from "lucide-react";
+import { ArrowLeft, Gamepad2, Info, Flag, Bot, User } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
 
@@ -13,6 +13,7 @@ export const SetupView: React.FC = () => {
     setActivePlayerCount,
     players,
     updatePlayerName,
+    togglePlayerBot,
     startGame,
   } = useGame();
 
@@ -95,14 +96,40 @@ export const SetupView: React.FC = () => {
                 key={p.id}
                 className="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5 border border-surface-container"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <span className="text-xs font-bold flex items-center gap-1.5 text-on-surface">
                     <span className={`w-3 h-3 rounded-full ${info.dot} shadow-xs inline-block`} />
                     {info.label}
                   </span>
-                  <span className="text-[10px] font-semibold text-on-surface-variant">
-                    {info.turn}
-                  </span>
+                  {idx === 0 ? (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary flex items-center gap-1">
+                      <User className="w-3 h-3" />
+                      <span>Manusia</span>
+                    </span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => togglePlayerBot(p.id)}
+                      className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 transition-all cursor-pointer border ${
+                        p.isBot
+                          ? "bg-tertiary text-on-tertiary border-tertiary shadow-xs"
+                          : "bg-surface-container-lowest text-on-surface-variant border-outline/20 hover:bg-surface-container-high"
+                      }`}
+                      title="Klik untuk beralih antara Pemain Manusia atau Lawan Bot AI"
+                    >
+                      {p.isBot ? (
+                        <>
+                          <Bot className="w-3 h-3" />
+                          <span>Bot AI</span>
+                        </>
+                      ) : (
+                        <>
+                          <User className="w-3 h-3" />
+                          <span>Manusia</span>
+                        </>
+                      )}
+                    </button>
+                  )}
                 </div>
 
                 <input
