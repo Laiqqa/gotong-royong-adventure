@@ -16,7 +16,11 @@ export const metadata: Metadata = {
   description:
     "Permainan papan edukasi multipemain mengenalkan tradisi dan filosofi gotong royong 38 provinsi di Indonesia berlandaskan nilai-nilai luhur Pancasila.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-icon.svg",
   },
 };
 
