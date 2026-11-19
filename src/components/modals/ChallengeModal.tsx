@@ -6,6 +6,7 @@ import { HelpCircle, CheckCircle, AlertCircle, ArrowRight } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { CHALLENGE_QUIZZES } from "@/data/quizzes";
 import { Quiz } from "@/types/game";
+import { CardCornerMotif } from "@/components/ui/NusantaraBackground";
 
 export const ChallengeModal: React.FC = () => {
   const { activeModal, finishChallengeTurn, answerQuiz, activePlayer } = useGame();
@@ -46,11 +47,12 @@ export const ChallengeModal: React.FC = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.2 }}
-          className="bg-surface-container-lowest rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl flex flex-col gap-4 border border-surface-container"
+          className="relative overflow-hidden bg-surface-container-lowest rounded-2xl max-w-lg w-full p-5 sm:p-6 shadow-2xl flex flex-col gap-4 border border-surface-container"
           role="dialog"
           aria-modal="true"
           aria-labelledby="challenge-modal-title"
         >
+          <CardCornerMotif variant="gold" />
           {/* Header */}
           <div className="flex items-center justify-between border-b pb-3 border-surface-container">
             <div className="flex items-center gap-2.5">

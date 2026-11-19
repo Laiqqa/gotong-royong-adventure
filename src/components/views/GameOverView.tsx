@@ -6,6 +6,7 @@ import confetti from "canvas-confetti";
 import { Trophy, RotateCcw, Home } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { CertificateButton } from "@/components/ui/CertificateButton";
+import { CardCornerMotif } from "@/components/ui/NusantaraBackground";
 
 export const GameOverView: React.FC = () => {
   const { players, setView, restartGame } = useGame();
@@ -41,8 +42,9 @@ export const GameOverView: React.FC = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.3 }}
-        className="max-w-3xl mx-auto w-full bg-surface-container-lowest rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 flex flex-col items-center text-center gap-4 border border-surface-container"
+        className="relative overflow-hidden max-w-3xl mx-auto w-full bg-surface-container-lowest rounded-2xl sm:rounded-3xl shadow-xl p-4 sm:p-6 md:p-8 flex flex-col items-center text-center gap-4 border border-surface-container"
       >
+        <CardCornerMotif variant="gold" />
         {/* Trophy icon */}
         <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center animate-bounce shadow-inner">
           <Trophy className="w-7 h-7 sm:w-8 sm:h-8 text-secondary" />

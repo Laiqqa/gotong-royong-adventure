@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useGame } from "@/context/GameContext";
 import { IsometricMockup } from "@/components/landing/IsometricMockup";
-import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
+import { NusantaraBackground, CardCornerMotif } from "@/components/ui/NusantaraBackground";
 
 const titleContainerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -61,7 +61,7 @@ export const LandingView: React.FC = () => {
   return (
     <div className="w-full flex flex-col">
       {/* Hero Banner Section (Optimized to fit 100% on laptop screens) */}
-      <section className="relative overflow-hidden bg-surface-container-low py-6 sm:py-8 lg:py-4 lg:min-h-[calc(100vh-3.5rem)] lg:flex lg:flex-col lg:justify-center px-4 md:px-8 lg:px-12 border-b border-surface-container">
+      <section className="relative overflow-hidden bg-surface-container-low/65 py-6 sm:py-8 lg:py-4 lg:min-h-[calc(100vh-3.5rem)] lg:flex lg:flex-col lg:justify-center px-4 md:px-8 lg:px-12 border-b border-surface-container">
         <NusantaraBackground variant="hero" />
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
           {/* Left Column: Heading, Badges, CTAs */}
@@ -221,7 +221,6 @@ export const LandingView: React.FC = () => {
 
       {/* Educational Pillars Section */}
       <section id="pillars-section" className="relative overflow-hidden w-full py-12 md:py-16">
-        <NusantaraBackground variant="section" />
         <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 relative z-10">
           <div className="flex flex-col items-center text-center gap-1.5 mb-8 sm:mb-10">
           <span className="text-xs sm:text-sm font-extrabold text-secondary uppercase tracking-widest">
@@ -240,19 +239,20 @@ export const LandingView: React.FC = () => {
           <button
             type="button"
             onClick={() => setView("encyclopedia")}
-            className="text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-primary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
+            className="relative overflow-hidden text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-primary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-primary"
             title="Klik untuk mempelajari filosofi dan tradisi 38 provinsi di Ensiklopedia"
           >
-            <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+            <CardCornerMotif variant="emerald" />
+            <div className="relative z-10 w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
               <HeartHandshake className="w-6 h-6" />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-on-surface group-hover:text-primary transition-colors">
+            <h3 className="relative z-10 text-base sm:text-lg font-bold text-on-surface group-hover:text-primary transition-colors">
               Karakter Gotong Royong
             </h3>
-            <p className="text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
+            <p className="relative z-10 text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
               Menginternalisasi nilai kolaborasi, empati, dan kepedulian bersama teman sebaya demi mencapai tujuan pembangunan pos persatuan nusantara.
             </p>
-            <div className="mt-auto pt-2 text-xs font-bold text-primary flex items-center gap-1 group-hover:underline">
+            <div className="relative z-10 mt-auto pt-2 text-xs font-bold text-primary flex items-center gap-1 group-hover:underline">
               <span>Pelajari Filosofi Tradisi</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -262,19 +262,20 @@ export const LandingView: React.FC = () => {
           <button
             type="button"
             onClick={() => setView("setup")}
-            className="text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-tertiary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-tertiary"
+            className="relative overflow-hidden text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-tertiary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-tertiary"
             title="Klik untuk menjelajahi peta wilayah 42 petak papan permainan Nusantara"
           >
-            <div className="w-12 h-12 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center group-hover:scale-110 transition-transform">
+            <CardCornerMotif variant="teal" />
+            <div className="relative z-10 w-12 h-12 rounded-xl bg-tertiary/10 text-tertiary flex items-center justify-center group-hover:scale-110 transition-transform">
               <Globe2 className="w-6 h-6" />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-on-surface group-hover:text-tertiary transition-colors">
+            <h3 className="relative z-10 text-base sm:text-lg font-bold text-on-surface group-hover:text-tertiary transition-colors">
               Eksplorasi 38 Provinsi
             </h3>
-            <p className="text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
+            <p className="relative z-10 text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
               Mengenal adat istiadat dari Sabang hingga Merauke seperti Sambatan di Jawa, Batobo di Riau, hingga Marsiadapari di Sumatera Utara.
             </p>
-            <div className="mt-auto pt-2 text-xs font-bold text-tertiary flex items-center gap-1 group-hover:underline">
+            <div className="relative z-10 mt-auto pt-2 text-xs font-bold text-tertiary flex items-center gap-1 group-hover:underline">
               <span>Jelajahi Peta Wilayah</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>
@@ -284,19 +285,20 @@ export const LandingView: React.FC = () => {
           <button
             type="button"
             onClick={() => openModal("unity")}
-            className="text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-secondary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-secondary"
+            className="relative overflow-hidden text-left bg-surface-container-lowest p-5 sm:p-6 rounded-2xl shadow-xs hover:shadow-md hover:border-secondary/40 hover:-translate-y-1 transition-all flex flex-col gap-2.5 border border-surface-container cursor-pointer group focus:outline-none focus:ring-2 focus:ring-secondary"
             title="Klik untuk membuka ikrar persatuan dan kebhinekaan Sila ke-3"
           >
-            <div className="w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
+            <CardCornerMotif variant="gold" />
+            <div className="relative z-10 w-12 h-12 rounded-xl bg-secondary-container/20 text-secondary flex items-center justify-center group-hover:scale-110 transition-transform">
               <Users className="w-6 h-6" />
             </div>
-            <h3 className="text-base sm:text-lg font-bold text-on-surface group-hover:text-secondary transition-colors">
+            <h3 className="relative z-10 text-base sm:text-lg font-bold text-on-surface group-hover:text-secondary transition-colors">
               Toleransi dan Kebhinekaan
             </h3>
-            <p className="text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
+            <p className="relative z-10 text-xs sm:text-sm text-on-surface-variant font-medium leading-relaxed">
               Menumbuhkan kesadaran bahwa perbedaan suku, agama, dan budaya adalah anugerah terbesar pemersatu bangsa Indonesia.
             </p>
-            <div className="mt-auto pt-2 text-xs font-bold text-secondary flex items-center gap-1 group-hover:underline">
+            <div className="relative z-10 mt-auto pt-2 text-xs font-bold text-secondary flex items-center gap-1 group-hover:underline">
               <span>Satu Nusa Satu Bangsa</span>
               <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
             </div>

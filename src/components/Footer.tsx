@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
   if (view === "cover" || view === "board") return null;
 
   return (
-    <footer className="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-t border-surface-container mt-auto">
+    <footer className="relative z-10 w-full bg-surface-container-low/85 backdrop-blur-xs shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-t border-surface-container mt-auto">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4 sm:py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-center md:text-left">
         <div className="flex flex-col gap-0.5">
           <span className="font-extrabold text-sm sm:text-base text-primary flex items-center justify-center md:justify-start gap-1.5">

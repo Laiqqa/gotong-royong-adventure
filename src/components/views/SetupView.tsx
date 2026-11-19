@@ -4,7 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Gamepad2, Info, Flag, Bot, User } from "lucide-react";
 import { useGame } from "@/context/GameContext";
-import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
+import { CardCornerMotif } from "@/components/ui/NusantaraBackground";
 
 export const SetupView: React.FC = () => {
   const {
@@ -26,13 +26,13 @@ export const SetupView: React.FC = () => {
 
   return (
     <div className="relative overflow-hidden w-full py-4 sm:py-6 lg:py-3 px-3 sm:px-6 md:px-8 flex-1 flex flex-col justify-center">
-      <NusantaraBackground variant="subtle" />
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="max-w-3xl mx-auto w-full bg-surface-container-lowest rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 md:p-7 flex flex-col gap-4 sm:gap-5 border border-surface-container"
+        className="relative overflow-hidden max-w-3xl mx-auto w-full bg-surface-container-lowest rounded-2xl sm:rounded-3xl shadow-lg p-4 sm:p-6 md:p-7 flex flex-col gap-4 sm:gap-5 border border-surface-container"
       >
+        <CardCornerMotif variant="emerald" />
         {/* Top Header */}
         <div className="flex items-center justify-between border-b pb-3 border-surface-container">
           <div className="flex items-center gap-2.5">

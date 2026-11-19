@@ -16,7 +16,7 @@ import {
 import { useGame } from "@/context/GameContext";
 import { PROVINCES } from "@/data/provinces";
 import { Province, Region } from "@/types/game";
-import { NusantaraBackground } from "@/components/ui/NusantaraBackground";
+import { CardCornerMotif } from "@/components/ui/NusantaraBackground";
 
 export const QuizArenaView: React.FC = () => {
   const { setView, openModal } = useGame();
@@ -93,16 +93,15 @@ export const QuizArenaView: React.FC = () => {
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] w-full py-6 sm:py-10 px-4 md:px-8 lg:px-12 flex flex-col justify-center items-center overflow-hidden">
-      <NusantaraBackground variant="hero" />
-
       <div className="relative z-10 w-full max-w-2xl">
         {/* Setup Screen */}
         {sessionState === "setup" && (
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-surface-container-lowest rounded-3xl p-5 sm:p-8 shadow-xl border border-surface-container flex flex-col gap-6"
+            className="relative overflow-hidden bg-surface-container-lowest rounded-3xl p-5 sm:p-8 shadow-xl border border-surface-container flex flex-col gap-6"
           >
+            <CardCornerMotif variant="gold" />
             {/* Header */}
             <div className="flex items-center justify-between border-b pb-4 border-surface-container">
               <div className="flex items-center gap-2.5">
@@ -195,8 +194,9 @@ export const QuizArenaView: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
-            className="bg-surface-container-lowest rounded-3xl p-5 sm:p-8 shadow-xl border border-surface-container flex flex-col gap-5"
+            className="relative overflow-hidden bg-surface-container-lowest rounded-3xl p-5 sm:p-8 shadow-xl border border-surface-container flex flex-col gap-5"
           >
+            <CardCornerMotif variant="emerald" />
             {/* Question Progress Header */}
             <div className="flex items-center justify-between border-b pb-3 border-surface-container">
               <div className="flex items-center gap-2">
@@ -316,8 +316,9 @@ export const QuizArenaView: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-xl border border-surface-container flex flex-col items-center text-center gap-5"
+            className="relative overflow-hidden bg-surface-container-lowest rounded-3xl p-6 sm:p-8 shadow-xl border border-surface-container flex flex-col items-center text-center gap-5"
           >
+            <CardCornerMotif variant="gold" />
             <div className="w-16 h-16 rounded-full bg-secondary-container/20 text-secondary flex items-center justify-center shadow-inner">
               <Award className="w-8 h-8 text-secondary" />
             </div>
